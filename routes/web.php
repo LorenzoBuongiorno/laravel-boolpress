@@ -27,5 +27,5 @@ Route::middleware("auth")->namespace("Admin")->prefix("admin")->name("admin.")
 });
 
 Route::get("{any?}", function() {
-    return view("welcome");
+    return view("layouts.home");
 })->where("any", ".*");
