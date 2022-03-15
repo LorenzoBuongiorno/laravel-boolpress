@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Auth;
 
 class PostController extends Controller
 {
@@ -64,9 +65,10 @@ class PostController extends Controller
         }
 
         $post->slug = $slug;
-    
+        $post->user_id = Auth::user()->id;
+
         $post->save();
-    
+
         return redirect()->route("admin.posts.index");
     }
 
