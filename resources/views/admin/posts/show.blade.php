@@ -6,8 +6,9 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                  <div>
+                  <div class="d-flex">
                     {{$post->title}}
+                    <a class="ms-auto" href="{{route('admin.posts.edit', $post->slug)}}">Modifica</a>
                   </div>
                   <div>
                     Author: {{$post->user->name}}

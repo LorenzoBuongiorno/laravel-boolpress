@@ -90,9 +90,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $post = Post::where("slug", $slug)->first();
+
+        return view("admin.posts.edit", compact("post"));
     }
 
     /**
@@ -116,7 +118,7 @@ class PostController extends Controller
     
         $post->update($data);
     
-        return redirect()->route("admin.posts.show", $post->id);
+        return redirect()->route("admin.posts.show", $post->slug);
 
     }
 
