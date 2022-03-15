@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Auth;
@@ -93,8 +94,9 @@ class PostController extends Controller
     public function edit($slug)
     {
         $post = Post::where("slug", $slug)->first();
+        $categories = Category::all();
 
-        return view("admin.posts.edit", compact("post"));
+        return view("admin.posts.edit", ["post" => $post, "categories" => $categories]);
     }
 
     /**

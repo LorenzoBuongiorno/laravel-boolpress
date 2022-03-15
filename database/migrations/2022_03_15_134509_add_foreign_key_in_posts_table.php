@@ -22,6 +22,11 @@ class AddForeignKeyInPostsTable extends Migration
             $table->foreign("user_id")
                 ->references("id")
                 ->on("users");
+
+                $table->foreignId("category_id")
+                    ->constrained()
+                    ->nullable()
+                    ->after("user_id");
         });
     }
 
@@ -35,6 +40,9 @@ class AddForeignKeyInPostsTable extends Migration
         Schema::table('posts', function (Blueprint $table) {
             $table->dropForeign("posts_user_id_foreign");
             $table->dropColumn("user_id");
+
+            $table->dropForeign("posts_category_id_foreign");
+            $table->dropColumn("category_id");
         });
     }
 }
