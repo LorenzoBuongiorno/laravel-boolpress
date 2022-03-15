@@ -5,8 +5,19 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header d-flex">
-                  {{$post->title}}
+                <div class="card-header">
+                  <div>
+                    {{$post->title}}
+                  </div>
+                  <div>
+                    Author: {{$post->user->name}}
+                  </div>
+                  <div>
+                    E-mail: {{$post->user->email}}
+                  </div>
+                  <div>
+                    Creato il: {{$post->created_at}}
+                  </div>
                 </div>
 
                 <div class="card-body">
