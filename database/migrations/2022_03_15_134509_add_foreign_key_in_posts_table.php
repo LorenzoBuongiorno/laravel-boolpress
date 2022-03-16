@@ -23,13 +23,10 @@ class AddForeignKeyInPostsTable extends Migration
                 ->references("id")
                 ->on("users");
 
-                $table->unsignedBigInteger("category_id")
+            $table->foreignId("category_id")
                 ->nullable()
-                ->after("user_id");
-
-                $table->foreign("category_id")
-                ->references("id")
-                ->on("users");
+                ->after("user_id")
+                ->constrained();
 
         });
     }
