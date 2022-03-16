@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Post;
 use App\Category;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -31,8 +32,9 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view("admin.posts.create", compact("categories"));
+        return view("admin.posts.create", compact("categories", "tags"));
     }
 
     /**
@@ -46,7 +48,8 @@ class PostController extends Controller
         $data = $request->validate([
             "title" => "required|max:30",
             "content" => "required|max:140",
-            "category_id" => "nullable"
+            "category_id" => "nullable",
+            "tags" => "nullable"
         ]);
 
         $post = new Post();
@@ -73,6 +76,8 @@ class PostController extends Controller
 
         $post->save();
 
+        $post->tags()->attach($data["tags"]);
+
         return redirect()->route("admin.posts.index");
     }
 
@@ -98,8 +103,9 @@ class PostController extends Controller
     {
         $post = Post::where("slug", $slug)->first();
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view("admin.posts.edit", ["post" => $post, "categories" => $categories]);
+        return view("admin.posts.edit", ["post" => $post, "categories" => $categories, "tags" => $tags]);
     }
 
     /**
@@ -112,9 +118,10 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->validate([
-            "title" => "required|min:5",
-            "content" => "required|min:20",
-            "category_id" => "nullable"
+            "title" => "required|max:30",
+            "content" => "required|max:140",
+            "category_id" => "nullable",
+            "tags" => "nullable|exists:tags,id"
           ]);
           $post = Post::findOrFail($id);
       
@@ -124,6 +131,10 @@ class PostController extends Controller
     
         $post->update($data);
     
+        if (key_exists("tags", $data)) {
+            $post->tags()->sync($data["tags"]);
+          }
+
         return redirect()->route("admin.posts.show", $post->slug);
 
     }
