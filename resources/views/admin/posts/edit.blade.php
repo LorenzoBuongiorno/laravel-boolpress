@@ -57,7 +57,7 @@
                   @endforeach
 
                   @error('tags')
-                    <div class="text-red">{{ $message }}</div>
+                    <div class="text-danger">{{ $message }}</div>
                   @enderror
                 </div>
               </div>

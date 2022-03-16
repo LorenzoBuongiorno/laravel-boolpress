@@ -52,7 +52,7 @@
                                 id="tag_{{ $tag->id }}" name="tags[]">
                               <label class="form-check-label" for="tag_{{ $tag->id }}">{{ $tag->name }}</label>
                             </div>
-                          @endforeach
+                          @endforeach  
                         </div>
           
                         <div class="form-group">
