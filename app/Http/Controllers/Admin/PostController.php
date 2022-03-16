@@ -30,7 +30,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view("admin.posts.create");
+        $categories = Category::all();
+
+        return view("admin.posts.create", compact("categories"));
     }
 
     /**
@@ -43,7 +45,8 @@ class PostController extends Controller
     {
         $data = $request->validate([
             "title" => "required|max:30",
-            "content" => "required|max:140"
+            "content" => "required|max:140",
+            "category_id" => "nullable"
         ]);
 
         $post = new Post();
@@ -110,7 +113,8 @@ class PostController extends Controller
     {
         $data = $request->validate([
             "title" => "required|min:5",
-            "content" => "required|min:20"
+            "content" => "required|min:20",
+            "category_id" => "nullable"
           ]);
           $post = Post::findOrFail($id);
       
