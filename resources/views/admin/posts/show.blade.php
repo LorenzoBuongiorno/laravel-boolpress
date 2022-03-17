@@ -18,7 +18,13 @@
                     E-mail: {{$post->user->email}}
                   </div>
                   <div>
-                    Creato il: {{$post->created_at}}
+                    Creato il: {{$post->created_at->format("d/m/Y")}}
+                  </div>
+                  <div>
+                    @php
+                      use Carbon\Carbon;
+                    @endphp
+                    Ultima modifica: {{$post->updated_at->diffForHumans(Carbon::now())}}
                   </div>
                   <div>
                       Tags:
