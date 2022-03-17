@@ -8,7 +8,8 @@
                 <div class="card-header">
                   <div class="d-flex">
                     {{$post->title}}
-                    <a class="ms-auto" href="{{route('admin.posts.edit', $post->slug)}}">Modifica</a>
+                    <a class="btn btn-link ms-auto" href="{{route('admin.posts.edit', $post->slug)}}">Modifica</a>
+                    <span>@include('partials.deleteBtn' , [$post->id , 'route' =>'admin.posts.destroy'])</span>
                   </div>
                   <div>
                     Author: {{$post->user->name}}
@@ -18,6 +19,13 @@
                   </div>
                   <div>
                     Creato il: {{$post->created_at}}
+                  </div>
+                  <div>
+                      Tags:
+                      @foreach($post->tags as $tag)
+                             <span>#{{ $tag->name }} </span>
+                       
+                      @endforeach
                   </div>
                 </div>
 
