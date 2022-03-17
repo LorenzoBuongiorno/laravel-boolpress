@@ -16,11 +16,13 @@
  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <header class="p-4">
+    <header>
         @include('partials.header')
     </header>
     <main>
-
+        <div class="main-page">
+            BOOL BLOG
+        </div>
     </main>
 </body>
 </html>

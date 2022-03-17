@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8">
-        <div class="card">
+        <div class="card dark-theme">
           <div class="card-header d-flex">
             Modifica post
           </div>
@@ -18,7 +18,7 @@
               {{-- titolo --}}
               <div class="mb-3">
                 <label>Titolo</label>
-                <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
+                <input type="text" name="title" class="form-control dark-theme @error('title') is-invalid @enderror"
                   placeholder="Inserisci il titolo" value="{{ old('title', $post->title) }}" required>
                 @error('title')
                   <div class="invalid-feedback">{{ $message }}</div>
@@ -28,7 +28,7 @@
               {{-- contenuto del post --}}
               <div class="mb-3">
                 <label>Contenuto</label>
-                <textarea name="content" rows="10" class="form-control @error('content') is-invalid @enderror"
+                <textarea name="content" rows="10" class="form-control dark-theme @error('content') is-invalid @enderror"
                   placeholder="Inizia a scrivere qualcosa..." required>{{ old('content', $post->content) }}</textarea>
                 @error('content')
                   <div class="invalid-feedback">{{ $message }}</div>
@@ -37,7 +37,7 @@
 
               <div class="mb-3">
                 <label>Categoria</label>
-                <select name="category_id" class="form-select">
+                <select name="category_id" class="form-select dark-theme">
                   <option value="">none</option>
                   @foreach ($categories as $category)
                     <option value="{{ $category->id }}" @if ($post->category_id === $category->id) selected @endIf>
@@ -61,7 +61,7 @@
                   @enderror
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group p-2">
                 <a href="{{ route('admin.posts.show', $post->slug) }}" class="btn btn-secondary">Annulla</a>
                 <button type="submit" class="btn btn-success">Salva post</button>
               </div>

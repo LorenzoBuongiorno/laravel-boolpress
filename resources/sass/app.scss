@@ -1,5 +1,3 @@
-@import './header.scss';
-
 
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
@@ -9,3 +7,40 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+
+nav{
+    background-color: #3F3F40;
+    border-bottom: 2px solid #F05340;
+}
+
+.dark-theme{
+    background-color: #3F3F40;
+    color: #eee;
+    border: 1px solid #F05340;
+
+}
+
+.main-page{
+    text-align: center;
+    padding: 40px;
+    font-size: 300px;
+    color: #F05340;
+    letter-spacing: 6px;
+    font-weight: bold;
+    text-shadow: 0 1px 0px #F05340, 1px 0 0px #F05340, 1px 2px 1px #F05340, 2px 1px 1px #F05340, 2px 3px 2px #F05340, 3px 2px 2px #F05340, 3px 4px 2px #F05340, 4px 3px 3px #F05340, 4px 5px 3px #F05340, 5px 4px 2px #F05340, 5px 6px 2px #F05340, 6px 5px 2px #F05340, 6px 7px 1px #F05340, 7px 6px 1px #F05340, 7px 8px 0px #F05340, 8px 7px 0px #F05340;
+    -webkit-text-stroke: 3px #323233;
+    font-family: 'Staatliches', cursive;
+    animation: 2s transition;
+    
+}
+
+@keyframes transition {
+    0% {
+      opacity: 0%;
+    }
+    100% {
+        opacity: 100%;
+    }
+  }
