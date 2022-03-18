@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Post;
+use App\Traits\SlugGenerator;
+use Illuminate\Http\Request;
+use Symfony\Component\CssSelector\XPath\Extension\FunctionExtension;
+
+class PostController extends Controller
+{
+    use SlugGenerator;
+    public function index() {
+        $posts = Post::all();
+
+        // return response()->json([
+        //     "esito" => "ok",
+        //     "dataRichiesta" => now(),
+        //     "data" => $posts
+        // ]);
+
+        return response()->json($posts);
+
+    }
+        public Function store(Request $request) {
+            $data = $request->validate([
+            "title" => "required|max:30",
+            "content" => "required|max:140",
+            "category_id" => "nullable",
+            "tags" => "nullable"
+            ]);
+
+            $newPost = new Post();
+            $newPost->fill($data);
+            $newPost->save();
+            $newPost->user_id = 5;
+            $newPost->slug = $this->generateSlug($data["title"]);
+            return response()->json($newPost);
+        }
+        
+        public function show($id) {
+            $post = Post::findOrFail($id);
+
+            $post->load("user","tags","category");
+            return response()->json($post);
+        }
+    }

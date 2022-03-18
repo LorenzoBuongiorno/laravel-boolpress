@@ -23,6 +23,11 @@
         <div class="main-page">
             BOOL BLOG
         </div>
+        <div id="appVue">
+
+            
+        </div>
     </main>
+    <script src="{{ asset('js/vue.js') }}"></script>
 </body>
 </html>
