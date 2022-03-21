@@ -21,8 +21,9 @@
 
         <!-- Right Side Of Navbar -->
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/login"> Admin </a>
+          <li class="nav-item" v-for="route in routes" :key="route.path">
+            <!-- <a class="nav-link" @click="$router.push({name:'contacts.index'})"> Contatti </a> -->
+            <router-link class="nav-link" :to="!route.path ? '/' : route.path">{{route.meta.linkText}}</router-link>
           </li>
         </ul>
       </div>
@@ -33,7 +34,14 @@
 
 <script>
 export default {
-
+    data() {
+        return {
+            routes: []
+        }
+    },
+    mounted() {
+        this.routes = this.$router.getRoutes();
+    }
 }
 </script>
 

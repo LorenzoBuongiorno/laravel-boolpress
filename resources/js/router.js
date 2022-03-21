@@ -7,8 +7,18 @@ Vue.use(VueRouter);
 
 const router = new VueRouter({
     routes: [
-        {path: "/", component: Home, name: "home.index"},
-        {path: "/contacts", component: Contacts, name: "contact.index"}
+        {
+            path: "/",
+            component: Home,
+            name: "home.index",
+            meta: {title: "Homepage", linkText: "Home"},
+        },
+        {
+            path: "/contatti",
+            component: Contacts,
+            name: "contacts.index",
+            meta: {title: "Contatti", linkText: "Contatti"},
+        },
     ],
 });
 export default router;
