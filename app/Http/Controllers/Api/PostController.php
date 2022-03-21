@@ -46,6 +46,10 @@ class PostController extends Controller
             // $post = Post::findOrFail($id);
 
             // $post->load("user","tags","category");
+
+            if(!$post) {
+                abort(404);
+            }
             return response()->json($post);
         }
     }

@@ -21,9 +21,13 @@ export default {
     },
     methods: {
         async fetchPost() {
-            const resp = await axios.get("/api/posts/" + this.$route.params.post);
-            this.post = resp.data;
+            try {
+                const resp = await axios.get("/api/posts/" + this.$route.params.post);
+                this.post = resp.data;
+            } catch (er) {
+            this.$router.replace({name: "error"});
         }
+    }
     },
     mounted() {
         this.fetchPost();
