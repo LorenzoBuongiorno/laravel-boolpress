@@ -23,7 +23,7 @@ const router = new VueRouter({
         {
             path: "/posts/:post",
             component: PostShow,
-            name: "posts.index",
+            name: "posts.show",
             meta: {title: "Dettagli Post"},
         },
     ],
