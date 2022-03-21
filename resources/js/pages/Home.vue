@@ -46,7 +46,7 @@ data() {
           const resp = await axios.get("/api/posts?page=" + page);
             this.pagination = resp.data;
             this.posts = resp.data.data;
-        
+            // console.log(this.posts);
       },
 
   },
