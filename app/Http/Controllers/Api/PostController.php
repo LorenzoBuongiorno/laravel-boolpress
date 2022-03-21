@@ -12,7 +12,7 @@ class PostController extends Controller
 {
     use SlugGenerator;
     public function index() {
-        $posts = Post::all();
+        $posts = Post::paginate(6);
 
         // return response()->json([
         //     "esito" => "ok",

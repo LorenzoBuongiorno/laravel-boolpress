@@ -1,5 +1,5 @@
 <template>
-  <div class="col">
+  <div class="col d-flex justify-content-center">
     <div class="card dark-theme" style="width: 18rem;">
         <img src="https://www.logistec.com/wp-content/uploads/2017/12/placeholder.png" class="card-img-top" alt="...">
         <div class="card-body">
