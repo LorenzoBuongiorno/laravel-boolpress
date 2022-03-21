@@ -16,18 +16,9 @@
  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <header>
-        @include('partials.header')
-    </header>
-    <main>
-        <div class="main-page">
-            BOOL BLOG
-        </div>
-        <div id="appVue">
-
-            
-        </div>
-    </main>
+    <div id="appVue">
+    
+    </div>
     <script src="{{ asset('js/vue.js') }}"></script>
 </body>
 </html>
