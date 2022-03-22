@@ -49,8 +49,10 @@ export default {
       fetchUser() {
         Axios.get("/api/user").then((resp) => {
           this.user = resp.data;
+          localStorage.setItem("user", JSON.stringify(resp.data));
         }).catch((er) => {
           console.error("non loggato");
+          localStorage.removeItem("user");
         });
       }
       },

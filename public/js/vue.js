@@ -2004,8 +2004,10 @@ __webpack_require__.r(__webpack_exports__);
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/user").then(function (resp) {
         _this.user = resp.data;
+        localStorage.setItem("user", JSON.stringify(resp.data));
       })["catch"](function (er) {
         console.error("non loggato");
+        localStorage.removeItem("user");
       });
     }
   },
