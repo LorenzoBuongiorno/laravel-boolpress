@@ -25,6 +25,10 @@
             <!-- <a class="nav-link" @click="$router.push({name:'contacts.index'})"> Contatti </a> -->
             <router-link class="nav-link" :to="!route.path ? '/' : route.path">{{route.meta.linkText}}</router-link>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login" v-if="!user">Login</a>
+            <a class="nav-link" href="/admin" v-else>{{user.name}}</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -33,14 +37,27 @@
 </template>
 
 <script>
+import Axios from 'axios';
 export default {
     data() {
         return {
-            routes: []
+            routes: [],
+            user: null,
         }
     },
+    methods: {
+      fetchUser() {
+        Axios.get("/api/user").then((resp) => {
+          this.user = resp.data;
+        }).catch((er) => {
+          console.error("non loggato");
+        });
+      }
+      },
     mounted() {
-        this.routes = this.$router.getRoutes().filter((route) => !!route.meta.linkText);
+      this.routes = this.$router.getRoutes().filter((route) => !!route.meta.linkText);
+    this.fetchUser();
+    
     }
 }
 </script>

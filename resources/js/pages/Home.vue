@@ -1,7 +1,7 @@
 <template>
   <div class="container py-4 d-flex flex-column align-items-center">
       <div class="main-page">
-            BOOL BLOG
+            BOOLPRESS
         </div>
       <div class="row row-cols-1 row-cols-md-2 g-4">
             

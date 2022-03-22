@@ -1950,6 +1950,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -1984,16 +1986,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      routes: []
+      routes: [],
+      user: null
     };
+  },
+  methods: {
+    fetchUser: function fetchUser() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/user").then(function (resp) {
+        _this.user = resp.data;
+      })["catch"](function (er) {
+        console.error("non loggato");
+      });
+    }
   },
   mounted: function mounted() {
     this.routes = this.$router.getRoutes().filter(function (route) {
       return !!route.meta.linkText;
     });
+    this.fetchUser();
   }
 });
 
@@ -4228,24 +4248,46 @@ var render = function () {
               _c(
                 "ul",
                 { staticClass: "navbar-nav ml-auto" },
-                _vm._l(_vm.routes, function (route) {
-                  return _c(
-                    "li",
-                    { key: route.path, staticClass: "nav-item" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "nav-link",
-                          attrs: { to: !route.path ? "/" : route.path },
-                        },
-                        [_vm._v(_vm._s(route.meta.linkText))]
-                      ),
-                    ],
-                    1
-                  )
-                }),
-                0
+                [
+                  _vm._l(_vm.routes, function (route) {
+                    return _c(
+                      "li",
+                      { key: route.path, staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: !route.path ? "/" : route.path },
+                          },
+                          [_vm._v(_vm._s(route.meta.linkText))]
+                        ),
+                      ],
+                      1
+                    )
+                  }),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "nav-item" }, [
+                    !_vm.user
+                      ? _c(
+                          "a",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { href: "/login" },
+                          },
+                          [_vm._v("Login")]
+                        )
+                      : _c(
+                          "a",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { href: "/admin" },
+                          },
+                          [_vm._v(_vm._s(_vm.user.name))]
+                        ),
+                  ]),
+                ],
+                2
               ),
             ]
           ),
@@ -4360,7 +4402,7 @@ var render = function () {
     { staticClass: "container py-4 d-flex flex-column align-items-center" },
     [
       _c("div", { staticClass: "main-page" }, [
-        _vm._v("\n          BOOL BLOG\n      "),
+        _vm._v("\n          BOOLPRESS\n      "),
       ]),
       _vm._v(" "),
       _c(
@@ -20328,7 +20370,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       title: "Dettagli Post"
     }
   }, {
-    path: "*",
+    path: "/not-found",
+    alias: "*",
     component: _pages_Error_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     name: "error"
   }]

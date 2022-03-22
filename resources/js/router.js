@@ -28,7 +28,8 @@ const router = new VueRouter({
             meta: {title: "Dettagli Post"},
         },
         {
-            path:"*",
+            path:"/not-found",
+            alias:"*",
             component: Errore,
             name: "error"
         }
