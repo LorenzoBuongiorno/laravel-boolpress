@@ -4169,10 +4169,7 @@ var render = function () {
       [
         _c("img", {
           staticClass: "card-img-top",
-          attrs: {
-            src: "https://www.logistec.com/wp-content/uploads/2017/12/placeholder.png",
-            alt: "...",
-          },
+          attrs: { src: _vm.post.coverImg, alt: "..." },
         }),
         _vm._v(" "),
         _c(

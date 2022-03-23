@@ -20,6 +20,14 @@ class PostController extends Controller
         //     "data" => $posts
         // ]);
 
+        $posts->each(function ($post) {
+            if($post->coverImg) {
+                $post->coverImg = asset("storage/" . $post->coverImg);
+            } else {
+                $post->coverImg = "https://www.logistec.com/wp-content/uploads/2017/12/placeholder.png";
+            }
+        });
+
         return response()->json($posts);
 
     }
@@ -27,6 +35,7 @@ class PostController extends Controller
             $data = $request->validate([
             "title" => "required|max:30",
             "content" => "required|max:140",
+            "coverImg" => "required|max:500",
             "category_id" => "nullable",
             "tags" => "nullable"
             ]);

@@ -9,6 +9,7 @@ use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -48,6 +49,7 @@ class PostController extends Controller
         $data = $request->validate([
             "title" => "required|max:30",
             "content" => "required|max:140",
+            "coverImg" => "required|max:500",
             "category_id" => "nullable",
             "tags" => "nullable"
         ]);
@@ -73,6 +75,10 @@ class PostController extends Controller
 
         $post->slug = $slug;
         $post->user_id = Auth::user()->id;
+
+        if(key_exists("coverImg", $data)) {
+          $post->coverImg = Storage::put("PostCovers", $data["coverImg"]);
+        }
 
         $post->save();
 
@@ -120,6 +126,7 @@ class PostController extends Controller
         $data = $request->validate([
             "title" => "required|max:30",
             "content" => "required|max:140",
+            "coverImg" => "nullable|max:500",
             "category_id" => "nullable",
             "tags" => "nullable|exists:tags,id"
           ]);
@@ -128,8 +135,19 @@ class PostController extends Controller
           if ($data["title"] !== $post->title) {
             $data["slug"] = $this->generateSlug($data["title"]);
         }
-    
+
         $post->update($data);
+
+        if (key_exists("coverImg", $data)){
+          if($post->coverImg) {
+            Storage::delete($post->coverImg);
+          }
+
+          $coverImg = Storage::put("postCovers", $data["coverImg"]);
+          $post->coverImg = $coverImg;
+          $post->save();
+        }
+    
     
         if (key_exists("tags", $data)) {
             $post->tags()->sync($data["tags"]);

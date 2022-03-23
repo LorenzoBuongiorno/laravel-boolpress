@@ -10,7 +10,7 @@
                 </div>
 
                 <div class="card-body ">
-                    <form action="{{ route('admin.posts.store') }}" method="post">
+                    <form action="{{ route('admin.posts.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
           
                         {{-- titolo --}}
@@ -29,6 +29,16 @@
                           <textarea name="content" rows="10" class="form-control dark-theme @error('content') is-invalid @enderror"
                             placeholder="Inizia a scrivere qualcosa..." required>{{ old('content') }}</textarea>
                           @error('content')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                          @enderror
+                        </div>
+
+                        {{-- image --}}
+                        <div class="mb-3">
+                          <label>Image</label>
+                          <input type="file" name="coverImg" class="form-control dark-theme @error('coverImg') is-invalid @enderror"
+                            placeholder="Inserisci immagine">
+                          @error('coverImg')
                             <div class="invalid-feedback">{{ $message }}</div>
                           @enderror
                         </div>

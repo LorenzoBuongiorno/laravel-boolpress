@@ -12,6 +12,13 @@
                     <span>@include('partials.deleteBtn' , [$post->id , 'route' =>'admin.posts.destroy'])</span>
                   </div>
                   <div>
+                    @if($post->coverImg)
+                    <img src="{{asset("storage/" . $post->coverImg)}}" alt="" class="img-fluid">
+                    @else
+                    <img src="https://www.logistec.com/wp-content/uploads/2017/12/placeholder.png" alt="" class="img-fluid">
+                    @endif
+                  </div>
+                  <div>
                     Author: {{$post->user->name}}
                   </div>
                   <div>
