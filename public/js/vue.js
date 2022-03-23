@@ -2100,6 +2100,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2109,7 +2112,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       posts: [],
-      pagination: {}
+      pagination: {},
+      loading: true
     };
   },
   methods: {
@@ -2133,20 +2137,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   page = _this.pagination.last_page;
                 }
 
-                _context.next = 5;
+                _context.prev = 3;
+                _context.next = 6;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/posts?page=" + page);
 
-              case 5:
+              case 6:
                 resp = _context.sent;
                 _this.pagination = resp.data;
                 _this.posts = resp.data.data; // console.log(this.posts);
 
-              case 8:
+                _context.next = 14;
+                break;
+
+              case 11:
+                _context.prev = 11;
+                _context.t0 = _context["catch"](3);
+                console.log(_context.t0);
+
+              case 14:
+                _context.prev = 14;
+                setTimeout(function () {
+                  _this.loading = false;
+                }, 1000);
+                return _context.finish(14);
+
+              case 17:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, null, [[3, 11, 14, 17]]);
       }))();
     }
   },
@@ -4401,8 +4421,24 @@ var render = function () {
     { staticClass: "container py-4 d-flex flex-column align-items-center" },
     [
       _c("div", { staticClass: "main-page" }, [
-        _vm._v("\n          BOOLPRESS\n      "),
+        _vm._v("\n          BOOLPRESS\n    "),
       ]),
+      _vm._v(" "),
+      _vm.loading
+        ? _c(
+            "div",
+            {
+              staticClass: "fs-1 m-4 spinner-border text-danger",
+              staticStyle: { width: "5rem", height: "5rem" },
+              attrs: { role: "status" },
+            },
+            [
+              _c("span", { staticClass: "visually-hidden" }, [
+                _vm._v("Loading..."),
+              ]),
+            ]
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "div",
