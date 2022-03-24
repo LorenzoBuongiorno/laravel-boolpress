@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Post;
 use App\Category;
+use App\Mail\RegistrationMail;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -49,7 +51,7 @@ class PostController extends Controller
         $data = $request->validate([
             "title" => "required|max:30",
             "content" => "required|max:140",
-            "coverImg" => "required|max:500",
+            "coverImg" => "nullable|max:500",
             "category_id" => "nullable",
             "tags" => "nullable"
         ]);
@@ -81,6 +83,8 @@ class PostController extends Controller
         }
 
         $post->save();
+
+        Mail::to("admin@gmail.com")->send(new RegistrationMail());
 
         $post->tags()->attach($data["tags"]);
 
