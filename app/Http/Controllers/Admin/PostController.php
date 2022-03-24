@@ -22,7 +22,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::where("user_id" , Auth::user()->id)->withTrashed()->get();
 
         return view("admin.posts.index", compact("posts"));
     }
@@ -169,15 +169,25 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::withTrashed()->findOrFail($id);
 
-        $post->tags()->detach();
+        if($post->trashed()){
+          $post->tags()->detach();
+          $post->forceDelete();
+        } else {
+          $post->delete();
+        }
 
-        $post->delete();
 
         return redirect()->route("admin.posts.index");
     }
 
+
+
+
+
+
+    
     protected function generateSlug($postTitle) {
         $slug = Str::slug($postTitle);
 

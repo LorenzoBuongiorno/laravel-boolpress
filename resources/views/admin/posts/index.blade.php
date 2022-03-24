@@ -16,6 +16,10 @@
                         @foreach ($posts as $post)
                             <li class="list-group-item dark-theme">{{$post->title}}
                             <a href="{{route('admin.posts.show', $post->slug)}}">Show</a>
+                            @if($post->trashed())
+                                <span class="float-end">@include('partials.deleteBtn' , [$post->id , 'route' =>'admin.posts.destroy'])</span>
+                                <span class="badge bg-secondary">SoftDeleted</span>
+                            @endif
                         </li>
                         @endforeach
                       </ul>
