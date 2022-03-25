@@ -3,6 +3,7 @@
     <div class="show-card card dark-theme col-10 m-auto">
         <div class="card-body">
             <h5 class="card-title fs-1">{{post.title}}</h5>
+            <img :src="post.coverImg" alt="">
             <h6 class="card-subtitle mb-2 text-muted fs-4">{{post.category.type}}</h6>
             <p class="card-text fs-3">{{post.content}}</p>
         </div>
@@ -36,7 +37,5 @@ export default {
 </script>
 
 <style>
-.show-card{
 
-}
 </style>

@@ -86,7 +86,9 @@ class PostController extends Controller
 
         Mail::to("admin@gmail.com")->send(new RegistrationMail());
 
-        $post->tags()->attach($data["tags"]);
+        if(key_exists("tags", $data)){
+          $post->tags()->attach($data["tags"]);
+        }
 
         return redirect()->route("admin.posts.index");
     }
